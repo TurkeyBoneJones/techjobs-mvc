@@ -20,12 +20,11 @@
                         name="searchType"
                         th:id="${column.key}"
                         th:value="${column.key}"
-                        th:checked="${column.key == 'all'}"/>
+                        th:checked="${column.key} == ${lastColumn}"/>
                 <label th:for="${column.key}" th:text="${column.value}"></label>
             </span>
 
         </p>
-
         <p>
             <label for="searchTerm">Keyword:</label>
             <input type="text" name="searchTerm" id="searchTerm" />
@@ -37,6 +36,12 @@
     <hr />
 
     <!-- TODO #2 - Loop over jobs map to display all job fields -->
+    <table  th:fragment="search-results" th:each="job : ${searchResults}"  class="job-listing">
+        <tr th:each="field : ${job}" class="job-listing">
+            <td th:text="${#strings.capitalizeWords(field.key)}" class="job-listing"></td>
+            <td th:text="${#strings.capitalizeWords(field.value)}" class="job-listing"></td>
+        </tr>
+    </table>
 
 </div>
 
